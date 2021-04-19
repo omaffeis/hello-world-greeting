@@ -24,7 +24,7 @@ pipeline {
     
     stage ('Publication du binaire') {
           steps {
-            sh "curl -u admin:{MOT_DE_PASSE} --upload-file target/*.war 'http://10.10.20.31/repository/depot_test/app${BUILD_NUMBER}.war'"
+            sh "curl -u admin:admin --upload-file target/*.war 'http://10.10.20.31/repository/depot_test/app${BUILD_NUMBER}.war'"
           }
       }
             
