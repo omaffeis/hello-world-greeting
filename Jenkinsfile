@@ -4,7 +4,7 @@ pipeline {
   
   stages {
    
-    stage (‘Compilation et tests’) {
+    stage ('Compilation et tests') {
       agent {
             label 'agent_java'
       }
@@ -28,14 +28,14 @@ pipeline {
       }
     }
     
-    stage (‘Tests de déploiement’) {
+    stage ('Tests de déploiement') {
 
       agent {
-        label ‘agent_tomcat’
+        label 'agent_tomcat'
       }
 
       stages {
-        stage (‘Livraison continue’) {
+        stage ('Livraison continue') {
           
           stage('Téléchargement du binaire') {
             steps {
@@ -45,7 +45,7 @@ pipeline {
           }
         }
         
-        stage('test de performance') {
+        stage('Test de performance') {
           steps {
             sh '/home/jenkins/apache-jmeter/bin/jmeter.sh -n -t ./jmeter.jmx -l /home/jenkins/test_report.jtl'
           }
