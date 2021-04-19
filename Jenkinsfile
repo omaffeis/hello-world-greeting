@@ -4,7 +4,7 @@ pipeline {
   
   stages {
    
-   stage (‘Compilation et tests’) {
+    stage (‘Compilation et tests’) {
       agent {
             label 'agent_java'
       }
@@ -26,6 +26,20 @@ pipeline {
             sh "curl -u admin:admin --upload-file target/*.war 'http://10.10.20.31:8081/repository/depot_test/app${BUILD_NUMBER}.war'"
           }
       }
-   }        
+    }
+    
+    stage (‘Tests de déploiement’) {
+
+      agent {
+        label ‘agent_tomcat’
+      }
+
+      stages {
+        stage (‘Livraison continue’) {
+          
+          
+        }
+      }
+    }
   }
 }
