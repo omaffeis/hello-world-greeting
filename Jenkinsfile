@@ -60,7 +60,7 @@ pipeline {
 
         stage('Creation de l\'image') {
             agent {
-                label 'agent_docker'
+                label 'Docker'
             }
 
             stages {
