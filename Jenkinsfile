@@ -21,6 +21,12 @@ pipeline {
           }
       
         }
+    
+    stage ('Publication du binaire') {
+          steps {
+            sh "curl -u admin:{MOT_DE_PASSE} --upload-file target/*.war 'http://{ADRESSE_IP_SERVEUR_NEXUS}/repository/{NOM_DU_DEPOT}/app${BUILD_NUMBER}.war'"
+          }
+      }
             
   }
 }
