@@ -82,7 +82,7 @@ pipeline {
                     steps {
                         sh "docker tag tomcat_app omaffeis/tomcat_app:${BUILD_NUMBER}"
                         sh 'docker tag tomcat_app omaffeis/tomcat_app'
-                        sh 'docker login -u omaffeis -p TEqfwBkkSN5UHKV’
+                        sh 'docker login -u omaffeis -p TEqfwBkkSN5UHKV'
                         sh "docker push omaffeis/tomcat_app:${BUILD_NUMBER}"
                         sh 'docker push omaffeis/tomcat_app'
                     }
