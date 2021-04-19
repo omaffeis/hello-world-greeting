@@ -9,22 +9,24 @@ pipeline {
             label 'agent_java'
       }
 
-      stage('Test unitaire') {
-          steps {
-            sh 'mvn test'
-          }
-      }
+      stages {
+        stage('Test unitaire') {
+           steps {
+              sh 'mvn test'
+            }
+        }
 
-      stage('Compilation') {
-          steps {  
-            sh 'mvn -B -DskipTests clean package'
-          }
-      }
+        stage('Compilation') {
+            steps {  
+              sh 'mvn -B -DskipTests clean package'
+            }
+        }
     
-      stage ('Publication du binaire') {
-          steps {
-            sh "curl -u admin:admin --upload-file target/*.war 'http://10.10.20.31:8081/repository/depot_test/app${BUILD_NUMBER}.war'"
-          }
+        stage ('Publication du binaire') {
+            steps {
+              sh "curl -u admin:admin --upload-file target/*.war 'http://10.10.20.31:8081/repository/depot_test/app${BUILD_NUMBER}.war'"
+            }
+        }
       }
     }
     
@@ -48,6 +50,12 @@ pipeline {
         stage('Test de performance') {
           steps {
             sh '/home/jenkins/apache-jmeter/bin/jmeter.sh -n -t ./jmeter.jmx -l /home/jenkins/test_report.jtl'
+          }
+        }
+        
+        stage ('Validation de l\'application') {
+          steps {
+            sh "curl -u admin:admin --uploadfile /home/jenkins/tomcat/webapps/app.war 'http://10.10.20.31:8081/repository/hello_fiable/app_fiable${BUILD_NUMBER}.war'"
           }
         }
       }
